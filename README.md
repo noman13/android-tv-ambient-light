@@ -5,7 +5,7 @@
 **Ambient lighting for Android TV that doesn't make your video stutter.**
 
 Drive an LED strip behind your TV from the picture on screen, through a cheap USB LED controller,
-with 1080p playback kept at full frame rate.
+with 1080p, 2K 60 fps and 4K playback kept at full frame rate.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![Android TV 10+](https://img.shields.io/badge/Android%20TV-10%2B-3DDC84?logo=android&logoColor=white)
@@ -37,9 +37,20 @@ Measured on a Haier K66 (Android TV 14), 1080p 23.98 fps video in Nuvio:
 | Typical screen-recording ambient app | **13-17 fps** | 70-126 |
 | **TV Ambient** (shell screenshots, 10/s) | **23.97 fps** | 3 |
 
+Higher resolutions and frame rates in SmartTube, with TV Ambient capturing 30 screenshots a second:
+
+| Video | Video frame rate with lights on | Notes |
+|---|---|---|
+| 1080p 60 fps | **58.3 fps** | No frame later than 34 ms (one missed refresh at most) |
+| 2K 60 fps | **57.4 fps** | No frame later than 34 ms |
+| 4K 25 fps | **99.7% of frames shown** | 4 frames dropped by the decoder in 60 s |
+
+The 60 fps rows are averages over three samples of ~126 frames each. The 4K row counts the decoder's own
+dropped frames; pauses while the stream was buffering are not counted.
+
 ## Features
 
-- **Smooth video**: shell-screenshot capture keeps 1080p playback at full speed (see above)
+- **Smooth video**: shell-screenshot capture keeps 1080p, 2K 60 fps and 4K playback at full speed (see above)
 - **Fallback capture**: standard screen recording for TVs where ADB is not available
 - **Picture tuning**: brightness, saturation, gamma, red/green/blue balance, black threshold, smoothing
 - **Letterbox aware**: black-border detection for 21:9 films and 4:3 content
@@ -198,7 +209,7 @@ shell-level access on your TV. Things to know:
 
 | TV | Android | Status |
 |---|---|---|
-| Haier K66 (H43K66UG, MediaTek m7332) | TV 14 | ✅ Reference device: smooth 1080p with shell screenshots |
+| Haier K66 (H43K66UG, MediaTek m7332) | TV 14 | ✅ Reference device: smooth 1080p, 2K 60 fps and 4K with shell screenshots |
 
 Tested your TV? Please open an issue or a pull request to add it; see [CONTRIBUTING.md](CONTRIBUTING.md).
 

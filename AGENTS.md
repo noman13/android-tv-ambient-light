@@ -87,6 +87,20 @@ Nuvio, 1080p AVC 23.98 fps, frames delivered by the player's SurfaceView layer o
 | Shell screenshots 10/s | 60% | 23.97 fps | 3 |
 | Shell screenshots 20/s | 75% | 23.38 fps | 14 |
 
+SmartTube, shell screenshots at 30/s, LEDs on. SmartTube draws these videos into its own window rather than a
+SurfaceView, so pacing comes from `dumpsys SurfaceFlinger --latency` on the PlaybackActivity window layer, and
+`mmdisp` stayed out of the top processes:
+
+| Video | Delivered (3 samples of ~126 frames) | Frames over 20 ms | Worst frame | ShellCapture / app CPU |
+|---|---|---|---|---|
+| 1080p 60 fps | 57.9-58.4 fps, mean 58.3 | 3-4 | 34.0 ms | 19% / 9% |
+| 2K 60 fps | 55.8-58.9 fps, mean 57.4 | 2-9 | 34.2 ms | 20% / 10% |
+
+4K 25 fps: the window layer mixes 60 Hz redraws with video frames, so frame timing is unreliable there. Count the
+decoder's drops instead: `logcat | grep -E 'MediaCodecVideoRenderer: (dropOutputBuffer|skipOutputBuffer)'`.
+Result: 4 dropped in 60 s (~0.3% of ~1,500 frames). Check `dumpsys media_session` for `BUFFERING(6)` before
+blaming capture: on a slow network a 4K stream rebuffers and the gaps look like stutter.
+
 ### Tried and removed; do not reintroduce without new evidence
 
 | Idea | Result |
