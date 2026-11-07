@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- CH340 / CH341 (the D1 mini controller) -->
+    <usb-device vendor-id="6790" product-id="29987" />
+    <usb-device vendor-id="6790" product-id="21795" />
+    <!-- CP210x, FTDI FT232, Arduino-style CDC boards -->
+    <usb-device vendor-id="4292" product-id="60000" />
+    <usb-device vendor-id="1027" product-id="24577" />
+    <usb-device vendor-id="9025" />
+</resources>

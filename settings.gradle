@@ -1,0 +1,18 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        // usb-serial-for-android (CH340 / CP210x / FTDI drivers) is published on JitPack.
+        maven { url 'https://jitpack.io' }
+    }
+}
+rootProject.name = "tv-ambilight"
+include ':app'

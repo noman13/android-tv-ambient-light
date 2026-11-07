@@ -1,0 +1,21 @@
+# Gradle / Android build output
+.gradle/
+build/
+app/build/
+local.properties
+*.iml
+.idea/
+.vscode/
+.DS_Store
+
+# Built APKs are attached to GitHub Releases, never committed
+dist/
+*.apk
+*.aab
+
+# Signing material and keys
+*.jks
+*.keystore
+keystore.properties
+adbkey
+adbkey.pub
